@@ -1,0 +1,66 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Restaurant Users";
+}
+
+
+<div class="container">
+    <h1>Restaurant User Management</h1>
+
+    <div class="form-container">
+        <h2>Add New User</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <button type="submit" class="btn">Add User</button>
+        </form>
+    </div>
+
+    @if (@Model.condition)
+    {
+         <span class="error">a user has been created</span>
+    }
+    else
+    {
+       <div class="success">this user already exits</div>
+
+    }
+
+    <div class="table-container">
+        <h2>All Users (@Model.AllUsers.Count)</h2>
+        
+        @if (Model.AllUsers.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.AllUsers)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="no-data">No users found. Add some users above!</p>
+        }
+    </div>
+</div>
